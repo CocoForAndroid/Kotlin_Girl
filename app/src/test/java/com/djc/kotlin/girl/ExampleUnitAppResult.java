@@ -1,4 +1,4 @@
-package com.djc.kotlin.kotlin_girl;
+package com.djc.kotlin.girl;
 
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class ExampleUnitAppResult {
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
