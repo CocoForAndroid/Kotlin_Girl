@@ -9,6 +9,5 @@ data class GankData(
         var _id: String?,
         var type: String?,
         var url: String?,
-        var desc: String?,
-        var images: String?
+        var desc: String?
 )

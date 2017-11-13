@@ -9,8 +9,9 @@ import android.support.v7.app.AppCompatActivity
  * @description activity基类
  */
 abstract class BaseAty : AppCompatActivity() {
+    protected val TAG = this.javaClass.simpleName
     //获取布局id
-    abstract fun getLayoutId():Int
+    abstract fun getLayoutId(): Int
 
     abstract fun initViews()
 

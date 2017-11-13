@@ -13,9 +13,6 @@ import com.djc.kotlin.girl.bean.GankData
 interface HomeContract {
     interface Presenter : BasePresenter
 
-    interface View : BaseView<Presenter> {
+    interface View : BaseView<Presenter>
 
-        //展示请求列表
-        fun showList(result: AppResult<List<GankData>>)
-    }
 }

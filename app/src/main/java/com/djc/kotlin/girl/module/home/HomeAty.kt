@@ -1,6 +1,7 @@
 package com.djc.kotlin.girl.module.home
 
 
+import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
@@ -19,8 +20,7 @@ import com.djc.kotlin.girl.module.home.video.VideoFragment
  * @description 主页
  */
 class HomeAty : BaseAty(), HomeContract.View {
-    override fun showList(result: AppResult<List<GankData>>) {
-    }
+
 
 
     private lateinit var mToolbar: Toolbar
@@ -33,6 +33,7 @@ class HomeAty : BaseAty(), HomeContract.View {
     private val titles: ArrayList<String> = ArrayList()
     //tab内容
     private val fragments: ArrayList<Fragment> = ArrayList()
+
     override fun initViews() {
         mToolbar = findViewById(R.id.toolbar)
         mTabLayout = findViewById(R.id.tab_layout)
@@ -58,23 +59,43 @@ class HomeAty : BaseAty(), HomeContract.View {
 
     private fun initTab() {
         //repeat函数:重复执行代码块
-        repeat(titles.size-1){
-            fragments.add(CommonFragment.newInstance(it,null))
-            Log.d("zzz","position = $it")
+        repeat(titles.size - 1) {
+            fragments.add(CommonFragment.newInstance(it, null))
+            Log.d(TAG, "position = $it")
             mTabLayout.addTab(mTabLayout.newTab())
         }
         //休息视频
-        fragments.add(VideoFragment.newInstance(null,null))
+        fragments.add(VideoFragment.newInstance(null, null))
         mTabLayout.addTab(mTabLayout.newTab())
 
         mTabLayout.tabMode = TabLayout.MODE_SCROLLABLE
 
-
-        val adapter = ContentAdapter(supportFragmentManager,titles,fragments)
+        Log.d(TAG, fragments.toString())
+        val adapter = ContentAdapter(supportFragmentManager, titles, fragments)
+        mViewPager.offscreenPageLimit = 0
         mViewPager.adapter = adapter
 
         mTabLayout.setupWithViewPager(mViewPager)
 
+//        mTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+//            override fun onTabReselected(tab: TabLayout.Tab?) {
+//
+//            }
+//
+//            override fun onTabUnselected(tab: TabLayout.Tab?) {
+//            }
+//
+//            override fun onTabSelected(tab: TabLayout.Tab?) {
+//                val currentFragment = tab?.position?.let { fragments[it] }
+//                val bundle = Bundle()
+//                tab?.position?.let { it }?.
+//                        let { bundle.putInt("current_pos", it)
+//                        Log.d(TAG,"it = $it")
+//                        }
+//                currentFragment?.arguments= bundle
+//            }
+//
+//        })
 
     }
 

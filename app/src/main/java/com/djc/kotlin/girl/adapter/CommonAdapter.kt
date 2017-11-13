@@ -2,6 +2,7 @@ package com.djc.kotlin.girl.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         if (holder is ViewHolder) {
             //文章
+            holder.tv?.text = data?.get(position)?.desc
         } else {
             //图片
         }
@@ -29,6 +31,7 @@ class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
 
 
     override fun getItemCount(): Int {
+        Log.d("caonima","${data?.size}")
         return data?.size ?: 0
     }
 
@@ -40,7 +43,7 @@ class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
             }
 
             1 -> {
-                val view = inflate.inflate(R.layout.item_common_article_list, parent, false)
+                val view = inflate.inflate(R.layout.item_common_img_list, parent, false)
                 return ImgViewHolder(view)
             }
         }
@@ -63,11 +66,10 @@ class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
 
     class ViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
         var tv: TextView? = null
-        var iv: ImageView? = null
 
         init {
             with(view) {
-
+                tv = this?.findViewById(R.id.desc_tv)
             }
         }
 
@@ -78,7 +80,7 @@ class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
 
         init {
             with(view) {
-
+                iv = this?.findViewById(R.id.item_iv)
             }
         }
     }

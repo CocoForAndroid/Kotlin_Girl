@@ -30,9 +30,7 @@ class ContentAdapter(fm: FragmentManager?
         return titles[position]
     }
 
-//    override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
-//        return view == `object`
-//    }
+
 
 
 }
