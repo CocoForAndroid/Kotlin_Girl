@@ -6,5 +6,5 @@ package com.djc.kotlin.girl
  * @description
  */
 interface BasePresenter{
-    fun star()
+    fun start()
 }

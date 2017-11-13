@@ -11,7 +11,7 @@ import io.reactivex.functions.Function
  */
 class HttpResultFunc<T> : Function<AppResult<T>, T> {
     override fun apply(t: AppResult<T>): T {
-        if (!t.error) {
+        if (t.error) {
             throw ApiException()
         }
         return t.results

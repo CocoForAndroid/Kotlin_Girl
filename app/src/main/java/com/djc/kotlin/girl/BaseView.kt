@@ -6,5 +6,5 @@ package com.djc.kotlin.girl
  * @description
  */
 interface BaseView<T> {
-    var persenter: T
+    var presenter: T
 }
