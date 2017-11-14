@@ -2,10 +2,16 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:background="@color/colorBg"
              tools:context="com.djc.kotlin.girl.module.home.common.CommonFragment">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/common_list"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:id="@+id/srf_layout"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/common_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </FrameLayout>

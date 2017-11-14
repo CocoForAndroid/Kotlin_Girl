@@ -1,7 +1,6 @@
 package com.djc.kotlin.girl.module.home
 
 
-import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
@@ -9,8 +8,6 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import com.djc.kotlin.girl.BaseAty
 import com.djc.kotlin.girl.R
-import com.djc.kotlin.girl.bean.AppResult
-import com.djc.kotlin.girl.bean.GankData
 import com.djc.kotlin.girl.module.home.common.CommonFragment
 import com.djc.kotlin.girl.module.home.video.VideoFragment
 
@@ -77,25 +74,6 @@ class HomeAty : BaseAty(), HomeContract.View {
 
         mTabLayout.setupWithViewPager(mViewPager)
 
-//        mTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabReselected(tab: TabLayout.Tab?) {
-//
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {
-//            }
-//
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                val currentFragment = tab?.position?.let { fragments[it] }
-//                val bundle = Bundle()
-//                tab?.position?.let { it }?.
-//                        let { bundle.putInt("current_pos", it)
-//                        Log.d(TAG,"it = $it")
-//                        }
-//                currentFragment?.arguments= bundle
-//            }
-//
-//        })
 
     }
 

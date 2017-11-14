@@ -2,11 +2,21 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_height="wrap_content">
 
     <TextView
         android:layout_width="match_parent"
         android:id="@+id/desc_tv"
+        android:textColor="@color/colorListTitle"
+        tools:text="test"
+        android:textSize="17sp"
+        android:minLines="2"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

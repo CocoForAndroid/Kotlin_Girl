@@ -10,10 +10,11 @@ import com.djc.kotlin.girl.bean.GankData
  * @description
  */
 interface CommonContract {
-    interface View:BaseView<Presenter>{
-        fun showList(data:ArrayList<GankData>)
+    interface View : BaseView<Presenter> {
+        fun showList(data: ArrayList<GankData>)
     }
-    interface Presenter:BasePresenter{
 
+    interface Presenter : BasePresenter {
+        fun loadMoreData(currentPage:Int)
     }
 }

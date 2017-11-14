@@ -6,21 +6,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
+        android:background="@color/colorTheme"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:id="@+id/toolbar"
             app:layout_scrollFlags="scroll"
+            app:titleTextColor="@color/colorTitle"
+            android:background="@color/colorTheme"
             android:layout_height="?attr/actionBarSize"/>
 
         <android.support.design.widget.TabLayout
             android:layout_width="match_parent"
+            app:tabSelectedTextColor="@color/colorTitle"
+            app:tabIndicatorColor="@color/colorTitle"
             android:id="@+id/tab_layout"
+            app:tabTextColor="#624c46"
             android:layout_height="wrap_content"/>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:id="@+id/vp_content"
         android:layout_height="match_parent"/>

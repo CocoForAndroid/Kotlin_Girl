@@ -2,28 +2,43 @@ package com.djc.kotlin.girl.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.request.RequestOptions
+import com.djc.kotlin.girl.GlideApp
 import com.djc.kotlin.girl.R
 import com.djc.kotlin.girl.bean.GankData
+import com.djc.kotlin.girl.utils.LocalUtils
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 /**
  * @author dong
  * @date 2017/11/13 14:59
  * @description 公共类型列表的适配器
  */
-class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
+class CommonAdapter(private val ctx: Context?, private var data: ArrayList<GankData>?)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         if (holder is ViewHolder) {
             //文章
             holder.tv?.text = data?.get(position)?.desc
-        } else {
+        } else if (holder is ImgViewHolder) {
             //图片
+            val url = data?.get(position)?.url
+            holder.iv?.apply {
+                layoutParams.height = (LocalUtils.getScreenHeight(context) / 3)
+                layoutParams.width = (LocalUtils.getScreenWidth(context) / 2)
+            }
+            GlideApp.with(ctx)
+                    .load(url)
+                    .placeholder(R.drawable.dog)
+                    .fitCenter()
+                    .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(10, 5)))
+                    .into(holder.iv)
         }
     }
 
@@ -31,7 +46,6 @@ class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
 
 
     override fun getItemCount(): Int {
-        Log.d("caonima","${data?.size}")
         return data?.size ?: 0
     }
 
@@ -46,6 +60,7 @@ class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
                 val view = inflate.inflate(R.layout.item_common_img_list, parent, false)
                 return ImgViewHolder(view)
             }
+
         }
         return ViewHolder(null)
     }
@@ -84,5 +99,6 @@ class CommonAdapter(ctx: Context?, private var data: ArrayList<GankData>?)
             }
         }
     }
+
 
 }
