@@ -1,6 +1,7 @@
 package com.djc.kotlin.girl.module.home.common
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
@@ -15,6 +16,7 @@ import android.view.ViewGroup
 import com.djc.kotlin.girl.R
 import com.djc.kotlin.girl.adapter.CommonAdapter
 import com.djc.kotlin.girl.bean.GankData
+import com.djc.kotlin.girl.module.home.detail.WebDetailAty
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 
 
@@ -46,7 +48,7 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
     private var mDatas: ArrayList<GankData> = ArrayList()
     //是否是下拉刷新
     private var isRefreshed = false
-    private var page:Int =1
+    private var page: Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -95,7 +97,7 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
                         val lastPos = layoutManager.findLastVisibleItemPosition()
                         val totalCount = layoutManager.itemCount
                         if (lastPos == totalCount - 1 && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                            isRefreshed=false
+                            isRefreshed = false
                             page++
                             loadMore()
                         }
@@ -103,6 +105,18 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
                 }
             }
         })
+        //进入详情
+        mAdapter.setClickListener {
+            val url = mDatas[it].url
+            if (mParam1 != 0) {
+                //不是图片
+                val i = Intent(context, WebDetailAty::class.java)
+                i.putExtra("url",url)
+                startActivity(i)
+            }else{
+                //TODO 大图预览
+            }
+        }
         return root
     }
 
@@ -110,7 +124,7 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
      * 加载更多
      */
     private fun loadMore() {
-        mRefreshLayout.isRefreshing= true
+        mRefreshLayout.isRefreshing = true
         presenter.loadMoreData(page)
     }
 
@@ -186,8 +200,8 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
         }
 
         //刷新重置
-        if (isRefreshed){
-            page=1
+        if (isRefreshed) {
+            page = 1
             mDatas.clear()
         }
         mDatas.addAll(data)

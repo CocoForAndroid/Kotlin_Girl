@@ -2,6 +2,7 @@ package com.djc.kotlin.girl.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,11 +40,17 @@ class CommonAdapter(private val ctx: Context?, private var data: ArrayList<GankD
                     .fitCenter()
                     .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(10, 5)))
                     .into(holder.iv)
+
+        }
+        //回调点击
+        holder?.itemView?.setOnClickListener {
+            Log.d("check","onClick")
+            mListener(position)
         }
     }
 
     private var inflate: LayoutInflater = LayoutInflater.from(ctx)
-
+    private lateinit var mListener: (Int) -> Unit
 
     override fun getItemCount(): Int {
         return data?.size ?: 0
@@ -100,5 +107,8 @@ class CommonAdapter(private val ctx: Context?, private var data: ArrayList<GankD
         }
     }
 
+    fun setClickListener(l: (Int) -> Unit) {
+        this.mListener = l
+    }
 
 }
