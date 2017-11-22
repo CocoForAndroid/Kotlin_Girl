@@ -39,7 +39,7 @@ class CommonPresenter(private var type: String?
 
     override fun start() {
         HttpUtils.createService(IGankIo::class.java)
-                .getGankData(type = type, count = pageSize, page = page)
+                .getGankData(type = type, count = pageSize, page = 1)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
