@@ -6,8 +6,8 @@ package com.djc.kotlin.girl.bean
  * @description 测试接口
  */
 data class GankData(
-        var _id: String?,
-        var type: String?,
-        var url: String?,
-        var desc: String?
+        val _id: String,
+        val type: String,
+        val url: String,
+        val desc: String
 )
