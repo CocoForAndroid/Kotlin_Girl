@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.djc.kotlin.girl.BasePresenter
 import com.djc.kotlin.girl.R
 import com.djc.kotlin.girl.adapter.CommonAdapter
 import com.djc.kotlin.girl.bean.GankData

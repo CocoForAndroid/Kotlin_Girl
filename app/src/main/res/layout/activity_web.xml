@@ -3,9 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <WebView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:id="@+id/web"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <WebView
+            android:layout_width="match_parent"
+            android:id="@+id/web"
+            android:layout_height="match_parent"/>
+        <include layout="@layout/common_layout_empty"/>
+
+    </FrameLayout>
+
 </RelativeLayout>

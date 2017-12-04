@@ -2,11 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/gank"
+        android:icon="@drawable/icon_girl"
         android:title="gank.io"/>
     <item
         android:id="@+id/setting"
+        android:icon="@drawable/icon_setting"
         android:title="设置"/>
     <item
+        android:icon="@drawable/icon_about"
         android:id="@+id/update"
         android:title="查看更新"/>
 </menu>

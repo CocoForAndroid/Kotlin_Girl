@@ -1,14 +1,22 @@
 package com.djc.kotlin.girl.module.home.video
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import com.djc.kotlin.girl.R
-
+import com.djc.kotlin.girl.utils.ApiConfig
+import com.djc.kotlin.girl.utils.HttpUtils
+import com.djc.kotlin.girl.utils.HttpUtilsTest
+import com.djc.kotlin.girl.utils.IGankIo
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 /**
@@ -21,12 +29,12 @@ import com.djc.kotlin.girl.R
  */
 class VideoFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
+
     private var mParam1: String? = null
     private var mParam2: String? = null
 
     private var mListener: OnFragmentInteractionListener? = null
-
+    private lateinit var mButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -37,8 +45,35 @@ class VideoFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_video, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_video, container, false)
+        with(view) {
+            mButton = findViewById(R.id.preview_update)
+        }
+        //查询版本
+        mButton.setOnClickListener {
+//            HttpUtilsTest.createService(IGankIo::class.java)
+//                    .getAppVersion(ApiConfig.APP_ID, ApiConfig.TOKEN)
+//                    .subscribeOn(Schedulers.io())
+//                    .unsubscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe({ result ->
+//                        if (getLocalVersion() < result.version) {
+//                            downLoadNewVersion(result.install_url)
+//                            Toast.makeText(context, "有新版本", Toast.LENGTH_LONG).show()
+//                        }else{
+//                            Toast.makeText(context, "没有新版本", Toast.LENGTH_LONG).show()
+//                        }
+//                    })
+
+        }
+        return view
+    }
+
+    /**
+     * 下载新版本
+     */
+    private fun downLoadNewVersion(install_url: String) {
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -101,4 +136,8 @@ class VideoFragment : Fragment() {
             return fragment
         }
     }
+
+
 }// Required empty public constructor
+
+
