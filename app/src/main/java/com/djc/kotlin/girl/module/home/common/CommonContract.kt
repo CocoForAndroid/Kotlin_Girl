@@ -12,9 +12,12 @@ import com.djc.kotlin.girl.bean.GankData
 interface CommonContract {
     interface View : BaseView<Presenter> {
         fun showList(data: ArrayList<GankData>)
+        fun showLoading()
+        fun hideLoading()
+        fun showNoNet()
     }
 
     interface Presenter : BasePresenter {
-        fun loadMoreData(currentPage:Int)
+        fun loadMoreData(currentPage: Int)
     }
 }

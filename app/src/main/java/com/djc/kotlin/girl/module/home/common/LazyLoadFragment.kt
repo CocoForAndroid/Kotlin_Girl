@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 
 /**
  * author： djc
@@ -19,13 +20,12 @@ abstract class LazyLoadFragment : Fragment() {
     private var mRootView: View? = null
     protected lateinit var mActivity: Activity
     //是否可见
-    protected  var isVisibled: Boolean =false
+    protected var isVisibled: Boolean = false
 
 
     //是否初始化完成
     //防止空指针
     protected var isPrepare: Boolean = false
-
 
 
     override fun onAttach(context: Context?) {
@@ -75,7 +75,6 @@ abstract class LazyLoadFragment : Fragment() {
      * 懒加载
      */
     abstract fun lazyLoad()
-
 
 
     /**

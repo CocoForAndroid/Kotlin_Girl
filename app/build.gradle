@@ -48,6 +48,8 @@ dependencies {
     //recyclerview 动画
     compile 'jp.wasabeef:recyclerview-animators:2.2.7'
     implementation 'com.android.support:design:26.1.0'
+    //BRAVH
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
 }
 repositories {
     mavenCentral()

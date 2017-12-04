@@ -13,14 +13,31 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.djc.kotlin.girl.BasePresenter
 import com.djc.kotlin.girl.R
 import com.djc.kotlin.girl.adapter.CommonAdapter
 import com.djc.kotlin.girl.bean.GankData
 import com.djc.kotlin.girl.module.home.detail.WebDetailAty
+import com.djc.kotlin.girl.utils.init
+import com.djc.kotlin.girl.widget.EmptyLayout
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 
 
 class CommonFragment : LazyLoadFragment(), CommonContract.View {
+    override fun showLoading() {
+        mEmptyLayout.setCurrentStatus(EmptyLayout.STATUS_LOADING)
+        Log.d("loading_djc", "loading")
+    }
+
+    override fun hideLoading() {
+        mEmptyLayout.hide()
+    }
+
+    override fun showNoNet() {
+        mEmptyLayout.setCurrentStatus(EmptyLayout.STATUS_NO_NET)
+    }
+
+
     /**
      * lazyLoad
      */
@@ -37,7 +54,7 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
     override lateinit var presenter: CommonContract.Presenter
 
     private lateinit var mCommonList: RecyclerView
-
+    private lateinit var mEmptyLayout: EmptyLayout
     private var mParam1: Int? = null
     private var mParam2: String? = null
     private lateinit var mAdapter: CommonAdapter
@@ -48,6 +65,7 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
     private var mDatas: ArrayList<GankData> = ArrayList()
     //是否是下拉刷新
     private var isRefreshed = false
+    //初始请求页码
     private var page: Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +75,12 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
         }
     }
 
+    private val mRefreshListener: SwipeRefreshLayout.OnRefreshListener =
+
+            SwipeRefreshLayout.OnRefreshListener {
+                isRefreshed = true
+                presenter.start(isRefreshed)
+            }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -74,19 +98,17 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
         //初始化presenter
         presenter = CommonPresenter(typeParam, page, 10, this)
         //开始加载
-        presenter.start()
+        presenter.start(isRefreshed)
         //with用法, 以对象为参数在函数块内以this指代对象 返回值为最后一行或用return指定
         with(root) {
             mCommonList = findViewById(R.id.common_list)
             mRefreshLayout = findViewById(R.id.srf_layout)
+            mEmptyLayout = findViewById(R.id.empty_layout)
         }
         //init adapter
         initAdapter()
-        //下拉刷新
-        mRefreshLayout.setOnRefreshListener {
-            isRefreshed = true
-            presenter.start()
-        }
+        //配置SwipeRefreshLayout
+        mRefreshLayout.init(mRefreshListener, activity.findViewById(R.id.app_bar_layout))
         //加载更多
         mCommonList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
@@ -111,9 +133,9 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
             if (mParam1 != 0) {
                 //不是图片
                 val i = Intent(context, WebDetailAty::class.java)
-                i.putExtra("url",url)
+                i.putExtra("url", url)
                 startActivity(i)
-            }else{
+            } else {
                 //TODO 大图预览
             }
         }

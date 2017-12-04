@@ -19,6 +19,5 @@ abstract class BaseAty : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         initViews()
-
     }
 }

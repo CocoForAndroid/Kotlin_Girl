@@ -1,6 +1,7 @@
 package com.djc.kotlin.girl.module.home
 
 
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
@@ -25,6 +26,7 @@ class HomeAty : BaseAty(), HomeContract.View {
     private lateinit var mTabLayout: TabLayout
     private lateinit var mViewPager: ViewPager
     private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var mAppBarLayout:AppBarLayout
     override lateinit var presenter: HomeContract.Presenter
 
     //tab标题
@@ -37,6 +39,7 @@ class HomeAty : BaseAty(), HomeContract.View {
         mTabLayout = findViewById(R.id.tab_layout)
         mViewPager = findViewById(R.id.vp_content)
         mDrawerLayout = findViewById(R.id.draw_layout)
+        mAppBarLayout = findViewById(R.id.app_bar_layout)
         //初始化toolBar
         initToolbar()
         //设置侧滑
@@ -86,9 +89,7 @@ class HomeAty : BaseAty(), HomeContract.View {
 
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_home
-    }
+    override fun getLayoutId(): Int = R.layout.activity_home
 
 
 }

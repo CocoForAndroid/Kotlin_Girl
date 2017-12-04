@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
+        android:id="@+id/app_bar_layout"
         android:background="@color/colorTheme"
         android:layout_height="wrap_content">
 
@@ -15,7 +16,7 @@
             app:layout_scrollFlags="scroll"
             app:titleTextColor="@color/colorTitle"
             android:background="@color/colorTheme"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="?android:attr/actionBarSize"/>
 
         <android.support.design.widget.TabLayout
             android:layout_width="match_parent"

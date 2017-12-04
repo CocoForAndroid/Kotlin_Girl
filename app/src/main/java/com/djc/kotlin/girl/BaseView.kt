@@ -7,4 +7,5 @@ package com.djc.kotlin.girl
  */
 interface BaseView<T> {
     var presenter: T
+
 }

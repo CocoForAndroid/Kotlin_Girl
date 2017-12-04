@@ -1,6 +1,5 @@
 package com.djc.kotlin.girl.module.home.common
 
-import android.util.Log
 import com.djc.kotlin.girl.utils.HttpResultFunc
 import com.djc.kotlin.girl.utils.HttpUtils
 import com.djc.kotlin.girl.utils.IGankIo
@@ -37,22 +36,33 @@ class CommonPresenter(private var type: String?
 
     }
 
-    override fun start() {
+    override fun start(isRefresh: Boolean) {
         HttpUtils.createService(IGankIo::class.java)
                 .getGankData(type = type, count = pageSize, page = 1)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
+                .doOnSubscribe({
+                    if (!isRefresh) {
+                        v.showLoading()
+                    }else{
+                        //结束下拉刷新
+                    }
+
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(HttpResultFunc())
                 .subscribe({
                     //onNext
                     result ->
+                    v.hideLoading()
                     v.showList(result)
 
                 }, {
                     //onError
                     e ->
                     e.printStackTrace()
+                    v.showNoNet()
                 })
 
     }

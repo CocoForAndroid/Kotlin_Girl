@@ -6,7 +6,7 @@ package com.djc.kotlin.girl.module.home
  * @description
  */
 class HomePresenter :HomeContract.Presenter{
-    override fun start() {
+    override fun start(isRefresh: Boolean) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
