@@ -51,6 +51,8 @@ dependencies {
     //BRAVH
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     implementation 'com.android.support:cardview-v7:26.1.0'
+    //photoview
+    compile 'com.github.chrisbanes:PhotoView:2.0.0'
 }
 repositories {
     mavenCentral()

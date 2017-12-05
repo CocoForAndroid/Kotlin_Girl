@@ -27,11 +27,13 @@ class CommonPresenter(private var type: String?
                     //onNext
                     result ->
                     v.showList(result)
+                    v.loadMoreComplete()
 
                 }, {
                     //onError
                     e ->
                     e.printStackTrace()
+                    v.loadMoreFail()
                 })
 
     }

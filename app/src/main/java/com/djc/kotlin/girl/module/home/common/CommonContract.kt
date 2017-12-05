@@ -15,6 +15,9 @@ interface CommonContract {
         fun showLoading()
         fun hideLoading()
         fun showNoNet()
+        fun loadMoreComplete()
+        fun loadMoreFail()
+        fun loadMoreEnd()
     }
 
     interface Presenter : BasePresenter {

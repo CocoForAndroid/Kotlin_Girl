@@ -7,5 +7,6 @@
     <color name="colorTitle">#EAF6F7</color>
     <color name="colorListTitle">#252133</color>
     <color name="colorBg">#f9f9f9</color>
+    <color name="colorBlack">#000</color>
     <!--<color name="colorTheme">#956f54</color>-->
 </resources>

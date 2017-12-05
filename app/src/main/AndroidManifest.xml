@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.home.detail.WebDetailAty"/>
+        <activity android:name=".module.home.preview.PreviewAty"/>
         <!--适配三星S8-->
         <meta-data
             android:name="android.max_aspect"

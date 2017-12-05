@@ -14,15 +14,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.djc.kotlin.girl.R
-import com.djc.kotlin.girl.adapter.CommonAdapter
+import com.djc.kotlin.girl.adapter.ContentAdapter
 import com.djc.kotlin.girl.bean.GankData
 import com.djc.kotlin.girl.module.home.detail.WebDetailAty
+import com.djc.kotlin.girl.module.home.preview.PreviewAty
 import com.djc.kotlin.girl.utils.init
 import com.djc.kotlin.girl.widget.EmptyLayout
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 
 
 class CommonFragment : LazyLoadFragment(), CommonContract.View {
+    override fun loadMoreFail() {
+        mAdapter.loadMoreFail()
+    }
+
+    override fun loadMoreEnd() {
+        mAdapter.loadMoreEnd()
+    }
+
+    override fun loadMoreComplete() {
+        mAdapter.loadMoreComplete()
+    }
+
     override fun showLoading() {
         mEmptyLayout.setCurrentStatus(EmptyLayout.STATUS_LOADING)
         Log.d("loading_djc", "loading")
@@ -51,12 +64,12 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
 
 
     override lateinit var presenter: CommonContract.Presenter
-
+    private lateinit var mAdapter: ContentAdapter
     private lateinit var mCommonList: RecyclerView
     private lateinit var mEmptyLayout: EmptyLayout
     private var mParam1: Int? = null
     private var mParam2: String? = null
-    private lateinit var mAdapter: CommonAdapter
+    //    private lateinit var mAdapter: CommonAdapter
     private var mListener: OnFragmentInteractionListener? = null
     //刷新布局
     private lateinit var mRefreshLayout: SwipeRefreshLayout
@@ -66,6 +79,7 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
     private var isRefreshed = false
     //初始请求页码
     private var page: Int = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -109,33 +123,27 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
         //配置SwipeRefreshLayout
         mRefreshLayout.init(mRefreshListener, activity.findViewById(R.id.app_bar_layout))
         //加载更多
-        mCommonList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!mRefreshLayout.isRefreshing) {
-                    if (recyclerView?.layoutManager is LinearLayoutManager) {
-                        val layoutManager: LinearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
-                        val lastPos = layoutManager.findLastVisibleItemPosition()
-                        val totalCount = layoutManager.itemCount
-                        if (lastPos == totalCount - 1 && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                            isRefreshed = false
-                            page++
-                            loadMore()
-                        }
-                    }
-                }
-            }
-        })
+        mAdapter.setOnLoadMoreListener({
+            isRefreshed = false
+            loadMore()
+        }, mCommonList)
         //进入详情
-        mAdapter.setClickListener {
-            val url = mDatas[it].url
+        mAdapter.setOnItemClickListener { _, _, position ->
+            val url = mDatas[position].url
             if (mParam1 != 0) {
                 //不是图片
                 val i = Intent(context, WebDetailAty::class.java)
                 i.putExtra("url", url)
                 startActivity(i)
             } else {
-                //TODO 大图预览
+                val i = Intent(context, PreviewAty::class.java)
+                val list = arrayListOf<String>()
+                mDatas.forEach {
+                    list.add(it.url)
+                }
+                i.putExtra("pos", position)
+                i.putExtra("imgList", list)
+                startActivity(i)
             }
         }
         return root
@@ -145,7 +153,8 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
      * 加载更多
      */
     private fun loadMore() {
-        mRefreshLayout.isRefreshing = true
+//        mRefreshLayout.isRefreshing = true
+        page++
         presenter.loadMoreData(page)
     }
 
@@ -154,7 +163,7 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
      * 初始化适配器
      */
     private fun initAdapter() {
-        mAdapter = CommonAdapter(context, mDatas)
+        mAdapter = ContentAdapter(context, mDatas)
         mCommonList.apply {
             layoutManager = if (mParam1 == 0) {
                 GridLayoutManager(context, 2)
