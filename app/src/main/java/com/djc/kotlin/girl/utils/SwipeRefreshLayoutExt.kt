@@ -2,6 +2,7 @@ package com.djc.kotlin.girl.utils
 
 import android.support.design.widget.AppBarLayout
 import android.support.v4.widget.SwipeRefreshLayout
+import com.djc.kotlin.girl.R
 
 /**
  * @author dong
@@ -10,7 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout
  */
 fun SwipeRefreshLayout.init(l: SwipeRefreshLayout.OnRefreshListener, appBarLayout: AppBarLayout? = null) {
     this.setOnRefreshListener(l)
-    this.setColorSchemeColors(resources.getColor(android.R.color.background_dark))
+    this.setColorSchemeColors(resources.getColor(R.color.colorRed))
     appBarLayout?.addOnOffsetChangedListener { _, verticalOffset ->
         this.isEnabled = verticalOffset <= 0
     }

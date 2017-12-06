@@ -29,9 +29,8 @@ class PreviewAty : BaseAty() {
 
     override fun initViews() {
         //设置全屏
-        val option: Int = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        val option: Int = View.SYSTEM_UI_FLAG_FULLSCREEN
         window.decorView.systemUiVisibility = option
-        window.navigationBarColor = Color.TRANSPARENT
         window.statusBarColor=Color.BLACK
         //接收图片
         pos = intent.getIntExtra("pos", 0)
@@ -49,9 +48,7 @@ class PreviewAty : BaseAty() {
 
 
     inner class Adapter : PagerAdapter() {
-        override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
-            return view === `object`
-        }
+        override fun isViewFromObject(view: View?, `object`: Any?): Boolean = view === `object`
 
         override fun getCount(): Int = imgList.size
 

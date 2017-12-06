@@ -2,13 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/colorTheme"
-    android:layout_height="200dp">
-    <ImageView
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_header_avatar_iv"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/icon_avatar"
         android:layout_width="80dp"
+        app:civ_border_width="0.5dp"
+        app:civ_border_color="@color/colorTheme"
         android:layout_height="80dp"/>
 </RelativeLayout>

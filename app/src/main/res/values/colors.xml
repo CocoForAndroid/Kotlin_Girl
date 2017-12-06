@@ -3,10 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorTheme">#956f54</color>
+    <color name="colorTheme">#f2f2f2</color>
     <color name="colorTitle">#EAF6F7</color>
     <color name="colorListTitle">#252133</color>
     <color name="colorBg">#f9f9f9</color>
     <color name="colorBlack">#000</color>
+    <color name="colorMainTxt">#252525</color>
+    <color name="colorRed">#e50834</color>
     <!--<color name="colorTheme">#956f54</color>-->
 </resources>

@@ -20,10 +20,10 @@
 
         <android.support.design.widget.TabLayout
             android:layout_width="match_parent"
-            app:tabSelectedTextColor="@color/colorTitle"
+            app:tabSelectedTextColor="@color/colorRed"
             app:tabIndicatorColor="@color/colorTitle"
             android:id="@+id/tab_layout"
-            app:tabTextColor="#624c46"
+            app:tabTextColor="@color/colorMainTxt"
             android:layout_height="wrap_content"/>
     </android.support.design.widget.AppBarLayout>
 
