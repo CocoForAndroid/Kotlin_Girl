@@ -1,5 +1,7 @@
 package com.djc.kotlin.girl.module.home.preview
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.support.v4.view.PagerAdapter
 import android.util.Log
@@ -31,7 +33,7 @@ class PreviewAty : BaseAty() {
         //设置全屏
         val option: Int = View.SYSTEM_UI_FLAG_FULLSCREEN
         window.decorView.systemUiVisibility = option
-        window.statusBarColor=Color.BLACK
+        window.statusBarColor = Color.BLACK
         //接收图片
         pos = intent.getIntExtra("pos", 0)
         imgList = intent.getStringArrayListExtra("imgList")
@@ -79,9 +81,18 @@ class PreviewAty : BaseAty() {
     override fun onRestart() {
         super.onRestart()
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        window.statusBarColor=Color.BLACK
+        window.statusBarColor = Color.BLACK
         Log.d("life—cycle", "onRestart")
     }
 
+    override fun finishAfterTransition() {
+        val i = Intent()
+        i.putExtra("index",mViewPager.currentItem)
+        //区分返回还是进入
+        i.putExtra("isBack",true)
+        Log.d("zzz","viewpager ${mViewPager.currentItem}")
+        setResult(Activity.RESULT_OK,i)
+        super.finishAfterTransition()
+    }
 
 }

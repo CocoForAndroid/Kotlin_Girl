@@ -1,6 +1,8 @@
 package com.djc.kotlin.girl.module.home
 
 
+import android.content.Intent
+import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -26,7 +28,7 @@ class HomeAty : BaseAty(), HomeContract.View {
     private lateinit var mTabLayout: TabLayout
     private lateinit var mViewPager: ViewPager
     private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var mAppBarLayout:AppBarLayout
+    private lateinit var mAppBarLayout: AppBarLayout
     override lateinit var presenter: HomeContract.Presenter
 
     //tab标题
@@ -86,10 +88,18 @@ class HomeAty : BaseAty(), HomeContract.View {
 
         mTabLayout.setupWithViewPager(mViewPager)
 
-
     }
 
     override fun getLayoutId(): Int = R.layout.activity_home
+
+    override fun onActivityReenter(resultCode: Int, data: Intent?) {
+        super.onActivityReenter(resultCode, data)
+        val index = data?.extras?.getInt("index")
+        if (index != null) {
+            val fragment: CommonFragment = fragments[0] as CommonFragment
+            fragment.setIndex(index,true)
+        }
+    }
 
 
 }

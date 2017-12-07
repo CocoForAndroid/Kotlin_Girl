@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,19 +19,19 @@ import android.widget.FrameLayout
  */
 abstract class LazyLoadFragment : Fragment() {
     private var mRootView: View? = null
-    protected lateinit var mActivity: Activity
+    protected lateinit var mActivity: AppCompatActivity
     //是否可见
-    protected var isVisibled: Boolean = false
+    private var isVisibled: Boolean = false
 
 
     //是否初始化完成
     //防止空指针
-    protected var isPrepare: Boolean = false
+    private var isPrepare: Boolean = false
 
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        this.mActivity = (context as Activity?)!!
+        this.mActivity = (context as AppCompatActivity?)!!
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

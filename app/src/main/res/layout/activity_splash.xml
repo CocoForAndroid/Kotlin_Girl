@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/colorBlack"
     android:layout_height="match_parent">
-    <com.github.chrisbanes.photoview.PhotoView
+    <ImageView
         android:layout_width="match_parent"
-        android:id="@+id/photo_view"
-
         android:layout_height="match_parent"/>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

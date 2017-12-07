@@ -1,5 +1,7 @@
 package com.djc.kotlin.girl.module.home.common
 
+import android.app.ActivityOptions
+import android.app.SharedElementCallback
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -13,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.djc.kotlin.girl.R
 import com.djc.kotlin.girl.adapter.ContentAdapter
 import com.djc.kotlin.girl.bean.GankData
@@ -79,6 +82,10 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
     private var isRefreshed = false
     //初始请求页码
     private var page: Int = 1
+    //记录大图预览页面的pos
+    private var previewPos: Int = 0
+    //记录是返回还是进入此Activity
+    private var isBack: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,7 +135,7 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
             loadMore()
         }, mCommonList)
         //进入详情
-        mAdapter.setOnItemClickListener { _, _, position ->
+        mAdapter.setOnItemClickListener { adapter, v, position ->
             val url = mDatas[position].url
             if (mParam1 != 0) {
                 //不是图片
@@ -143,10 +150,39 @@ class CommonFragment : LazyLoadFragment(), CommonContract.View {
                 }
                 i.putExtra("pos", position)
                 i.putExtra("imgList", list)
-                startActivity(i)
+                Log.d("anim", "v = $v")
+                val bundle = ActivityOptions.makeSceneTransitionAnimation(mActivity,
+                        v, "share").toBundle()
+                startActivity(i, bundle)
+                //更新图片对应关系
+                mActivity.setExitSharedElementCallback(object : SharedElementCallback() {
+                    override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
+                        super.onMapSharedElements(names, sharedElements)
+                        if (isBack) {
+                            Log.d("zzz", " onMapSharedElements $previewPos")
+                            val view = adapter.getViewByPosition(previewPos, R.id.item_iv) as ImageView
+                            sharedElements?.put("share", view)
+                            isBack = false
+                        }
+
+
+                    }
+                })
             }
         }
+        //接收返回值
+//        RxBus.toFlowable(ImgEvent::class.java)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe { event ->
+//                    previewPos = event.pos
+//                }
         return root
+    }
+
+    fun setIndex(index: Int, isBack: Boolean) {
+        previewPos = index
+        this.isBack = isBack
     }
 
     /**
