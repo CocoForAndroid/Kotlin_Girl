@@ -15,6 +15,7 @@ import com.djc.kotlin.girl.R
 import com.djc.kotlin.girl.widget.ImgPopupwindow
 import com.djc.kotlin.girl.widget.PhotoViewPager
 import com.github.chrisbanes.photoview.PhotoView
+import com.orhanobut.logger.Logger
 
 /**
  * @author dong
@@ -86,13 +87,13 @@ class PreviewAty : BaseAty() {
     }
 
     override fun finishAfterTransition() {
-        val i = Intent()
-        i.putExtra("index",mViewPager.currentItem)
-        //区分返回还是进入
-        i.putExtra("isBack",true)
-        Log.d("zzz","viewpager ${mViewPager.currentItem}")
-        setResult(Activity.RESULT_OK,i)
         super.finishAfterTransition()
+        val i = Intent()
+        i.putExtra("index", mViewPager.currentItem)
+        //区分返回还是进入
+        i.putExtra("isBack", true)
+        Logger.d("${mViewPager.currentItem}")
+        setResult(Activity.RESULT_OK, i)
     }
 
 }

@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import android.view.Window
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import com.orhanobut.logger.Logger.addLogAdapter
+
+
 
 /**
  * @author dong
@@ -21,5 +26,7 @@ abstract class BaseAty : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         initViews()
+        //初始化logger
+        Logger.addLogAdapter(AndroidLogAdapter())
     }
 }
